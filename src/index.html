@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Health Tracker App</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet'>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pikaday.css">
+</head>
+<body>
+
+  <aside class="background">
+    <picture class="background-image">
+      <source srcset="img/utensils.jpg 1x">
+      <img src="img/utensils.jpg" alt="Utensils and ingredients splayed in a preparatory manner.">
+    </picture>
+    <picture class="background-image">
+      <source srcset="img/food.jpg 1x">
+      <img src="img/food.jpg" alt="Close up on sliced avocado and mango.">
+    </picture>
+  </aside>
+
+  <main id="main">
+    <header id="header">
+      <h1 class="header-text" id="header-title">The Fit List</h1>
+      <h2 class="header-text" id="header-welcome">Welcome</h2>
+      <div class="header-date-content">
+        <input type="text" class="date-input" id="header-date">
+      </div>
+    </header>
+
+    <section id="count-container" title="Change count mode">
+      <img class="count-mode-icon" alt="count mode icon" src="img/down-triangle.svg">
+      <h3 class="header-text" id="count"></h3>
+    </section>
+
+    <section id="search-container">
+      <div class="search-inner-container">
+        <form id="search-form">
+          <button id="search-submit">
+            <img class="search-icon" src="img/search.svg" alt="search icon">
+          </button>
+          <input id="search-input" placeholder="Enter brand or food..." autocomplete="off">
+        </form>
+        <section class="search-results">
+          <div class="results-container foods">
+            <div class="results-inner-container">
+              <h5 class="results-title"></h5>
+              <ul class="result-items" id="food-results">
+                <!-- populate with food item results -->
+              </ul>
+            </div>
+            <div class="results-inner-container nutrition-facts-container">
+              <!-- container for nutrition facts -->
+            </div>
+          </div>
+        </section>
+      </div>
+      <img class="close-icon" id="close-search" src="img/close.svg" alt="close search icon">
+    </section>
+
+    <section class="manual-add-wrapper">
+      <div class="manual-add-inner-wrapper">
+        <img class="close-manual" src="img/cross-white.svg" alt="close manual add form">
+        <form class="manual-add-form">
+          <div class="manual-add-inputs">
+            <h6 class="manual-add-title">add your own calories</h6>
+            <input class="manual-input manual-amount" type="text" placeholder="amount">
+            <input class="manual-input manual-calories" type="text" placeholder="calories">
+            <input class="manual-input manual-item" type="text" placeholder="name">
+            <input class="manual-input manual-brand" type="text" placeholder="brand">
+            <button class="manual-submit">
+              <span class="manual-submit-text">add</span>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="add-toggle">
+        <span class="add-text">manual add</span>
+        <img class="add-icon" src="img/plus.svg" alt="add icon" title="Manually add calories">
+      </div>
+    </section>
+
+    <section id="main-foods-container">
+      <h4 class="main-foods-title">no calories added for this date.</h4>
+      <div class="foods-expand-toggle">
+        <span class="foods-expand-text">expand list</span>
+        <img class="foods-expand-icon" src="img/expand.svg" alt="expand icon">
+      </div>
+      <h4 class="clear-foods">clear all</h4>
+      <ul class="main-foods-list">
+        <!-- populate with chosen items -->
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- templates -->
+
+  <!-- Added Food Item -->
+  <script type="text/template" id="food-template">
+    <div class="food-item item">
+      <input class="item-amount food-quantity" type="number" min="1" value="<%= item_amount %>">
+      <div class="food-info">
+        <h5 class="food-name"> <%= item_name %> </h5>
+        <h6 class="food-brand"> <%= brand_name %> </h6>
+      </div>
+      <div class="food-calories">
+        <h3 class="calories-number"> <%= nf_calories * item_amount %> </h3>
+        <h4 class="calorie-title">cals</h4>
+      </div>
+    </div>
+    <img class="remove-food" src="img/cross.svg" alt="close icon">
+  </script>
+
+  <!-- Food Result -->
+  <script type="text/template" id="food-result-template">
+    <div class="food-result result">
+      <img class="eye" src="img/eye.svg" alt="Icon of an eye">
+      <div class="food-info">
+        <h5 class="food-name"> <%= item_name %> </h5>
+        <h6 class="food-brand"> <%= brand_name %> </h6>
+      </div>
+      <span class="add-button quick-add">quick add</span>
+      <div class="food-calories">
+        <h3 class="calories-number"> <%= nf_calories %> </h3>
+        <h4 class="calorie-title">cals</h4>
+      </div>
+    </div>
+  </script>
+
+  <!-- Nutrition Info template -->
+  <script type="text/template" id="nutrition-facts-template">
+    <div class="nutrition-facts">
+      <header class="nutrition-header">
+        <h4 class="nutrition-title">Nutrition Facts</h4>
+        <img class="close-nutrition" src="img/cross.svg" alt="Close Icon">
+        <h5 class="item-name"> <%= item_name %> - <%= brand_name %> </h5>
+        <span class="add-button slow-add">add</span>
+        <input class="item-amount" type="number" min="1" value="<%= item_amount %>"><span> (<%= nf_serving_weight_grams * item_amount %>g) </span>
+      </header>
+      <section class="nutrition-body">
+        <h6 class="nutrition-body-title">Amount Per Serving</h6>
+        <table class="nutrition-table">
+          <tbody>
+            <tr class="nutrition-tr nutrition-calories-row">
+              <td class="nutrition-calories"><b>Calories</b> <%= parseInt(nf_calories * item_amount) %> </td>
+              <td class="nutrition-calories nutrition-right-align"><b>Calories</b> from Fat <%= parseInt(nf_calories_from_fat * item_amount) %> </td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td colspan="2" class="daily-values-title nutrition-right-align">% Daily Value*</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td><span class="nutrition-main">Total Fat</span> <%= parseInt(nf_total_fat * item_amount) %>g</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_total_fat * item_amount / DV_total_fat * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td><span class="nutrition-sub">Saturated Fat</span> <%= nf_saturated_fat * item_amount %>g</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_saturated_fat * item_amount / DV_saturated_fat * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td colspan="2"><span class="nutrition-sub"><em>Trans</em> Fat</span> <%= nf_trans_fatty_acid * item_amount %>g</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td><span class="nutrition-main">Cholesterol</span> <%= nf_cholesterol * item_amount %>mg</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_cholesterol * item_amount / DV_cholesterol * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td><span class="nutrition-main">Sodium</span> <%= nf_sodium * item_amount %>mg</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_sodium * item_amount / DV_sodium * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td><span class="nutrition-main">Total Carbohydrates</span> <%= nf_total_carbohydrate * item_amount %>g</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_total_carbohydrate * item_amount / DV_total_carbohydrate * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td><span class="nutrition-sub">Dietary Fiber</span> <%= nf_dietary_fiber * item_amount %>g</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_dietary_fiber * item_amount / DV_fiber * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td colspan="2"><span class="nutrition-sub">Sugars</span> <%= nf_sugars * item_amount %>g</td>
+            </tr>
+            <tr class="nutrition-tr protein-row">
+              <td><span class="nutrition-main">Protein</span> <%= nf_protein * item_amount %>g</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_protein * item_amount / DV_protein * 100) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td>Vitamin A</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_vitamin_a_dv * item_amount) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td>Vitamin C</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_vitamin_c_dv * item_amount) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td>Calcium</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_calcium_dv * item_amount) %>%</td>
+            </tr>
+            <tr class="nutrition-tr">
+              <td>Iron</td>
+              <td class="nutrition-main nutrition-right-align"><%= parseInt(nf_iron_dv * item_amount) %>%</td>
+            </tr>
+          </tbody>
+        </table>
+        <footer class="nutrition-footer">*Percent Daily Values are based on a 2000 calorie diet. Your Daily Values may be higher or lower depending on your calorie needs.</footer>
+      </section>
+    </div>
+  </script>
+
+  <!-- lib CDN files -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="js/Lib/pikaday.js"></script>
+  <script src="js/Lib/pikaday.jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>
+  <!-- app JS -->
+  <script src="js/Models/Date.js"></script>
+  <script src="js/Models/CalorieCount.js"></script>
+  <script src="js/Models/Food.js"></script>
+  <script src="js/Models/FoodResult.js"></script>
+  <script src="js/Models/Nutrition.js"></script>
+  <script src="js/Models/Input.js"></script>
+  <script src="js/Models/ManualInput.js"></script>
+  <script src="js/Collections/Dates.js"></script>
+  <script src="js/Collections/Foods.js"></script>
+  <script src="js/Collections/FoodResults.js"></script>
+  <script src="js/Views/DateView.js"></script>
+  <script src="js/Views/CalorieCountView.js"></script>
+  <script src="js/Views/FoodView.js"></script>
+  <script src="js/Views/InputView.js"></script>
+  <script src="js/Views/ManualInputView.js"></script>
+  <script src="js/Views/FoodResultView.js"></script>
+  <script src="js/Views/AppView.js"></script>
+  <script src="js/Views/ResultsView.js"></script>
+  <script src="js/Views/NutritionView.js"></script>
+  <script src="js/app.js"></script>
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</body>
+</html>
