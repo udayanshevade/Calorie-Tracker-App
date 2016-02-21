@@ -83,6 +83,7 @@ app.AppView = Backbone.View.extend({
     this.checkListLength();
     app.calorieCount.updateCalories();
     this.updateDate();
+    app.chartsView.updateArc();
   },
 
   'checkListLength': function() {
@@ -168,6 +169,10 @@ app.AppView = Backbone.View.extend({
 
     }
 
+    if (app.charts.get('visible')) {
+      app.chartsView.updateArc();
+    }
+
   },
 
   'removeModel': function(model) {
@@ -179,13 +184,14 @@ app.AppView = Backbone.View.extend({
     var modelDate, modelFoods;
     var date = new Date().toDateString();
     app.dates.each(function(model) {
-      modelDate = model.get('date');
-      modelFoods = model.get('foods');
-      if (model
-        && modelDate !== date
-        && modelDate !== app.date.get('date')
-        && (!modelFoods || !modelFoods.length)) {
-        that.removeModel(model);
+      if (model) {
+        modelDate = model.get('date');
+        modelFoods = model.get('foods');
+        if (modelDate !== date
+          && modelDate !== app.date.get('date')
+          && (!modelFoods || !modelFoods.length)) {
+          that.removeModel(model);
+        }
       }
     });
   },
