@@ -41,7 +41,7 @@
           <button id="search-submit">
             <img class="search-icon" src="img/search.svg" alt="search icon">
           </button>
-          <input id="search-input" placeholder="Enter brand or food..." autocomplete="off">
+          <input id="search-input" placeholder="Search brand or food..." autocomplete="off">
         </form>
         <section class="search-results">
           <div class="results-container foods">
@@ -60,25 +60,44 @@
       <img class="close-icon" id="close-search" src="img/close.svg" alt="close search icon">
     </section>
 
-    <section class="manual-add-wrapper">
-      <div class="manual-add-inner-wrapper">
-        <img class="close-manual" src="img/cross-white.svg" alt="close manual add form">
-        <form class="manual-add-form">
-          <div class="manual-add-inputs">
-            <h6 class="manual-add-title">add your own calories</h6>
-            <input class="manual-input manual-amount" type="text" placeholder="amount">
-            <input class="manual-input manual-calories" type="text" placeholder="calories">
-            <input class="manual-input manual-item" type="text" placeholder="name">
-            <input class="manual-input manual-brand" type="text" placeholder="brand">
-            <button class="manual-submit">
-              <span class="manual-submit-text">add</span>
-            </button>
-          </div>
-        </form>
+    <section class="options-wrapper">
+      <div class="manual-add-wrapper">
+        <div class="manual-add-inner-wrapper">
+          <img class="close-manual" src="img/cross-white.svg" alt="close manual add form">
+          <form class="manual-add-form">
+            <div class="manual-add-inputs">
+              <h6 class="manual-add-title">add your own calories</h6>
+              <input class="manual-input manual-amount" type="text" placeholder="amount">
+              <input class="manual-input manual-calories" type="text" placeholder="calories">
+              <input class="manual-input manual-item" type="text" placeholder="name">
+              <input class="manual-input manual-brand" type="text" placeholder="brand">
+              <button class="manual-submit">
+                <span class="manual-submit-text">add</span>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="manual-toggle option-toggle">
+          <span class="toggle-text">manual add</span>
+          <img class="option-icon add-icon" src="img/plus.svg" alt="add icon" title="Manually add calories">
+        </div>
       </div>
-      <div class="add-toggle">
-        <span class="add-text">manual add</span>
-        <img class="add-icon" src="img/plus.svg" alt="add icon" title="Manually add calories">
+      <div class="charts-wrapper">
+        <div class="charts-inner-wrapper">
+          <img class="close-charts" src="img/cross-white.svg" alt="close charts tray">
+          <div class="calorie-radial-container"></div>
+          <div class="calorie-graph-container"></div>
+        </div>
+        <div class="charts-toggle option-toggle">
+          <span class="toggle-text">charts</span>
+          <img class="option-icon charts-icon" src="img/charts.svg" alt="charts icon" title="Visualize trends">
+        </div>
+      </div>
+      <div class="recipes-wrapper">
+        <div class="recipes-toggle option-toggle">
+          <span class="toggle-text">recipes</span>
+          <img class="option-icon recipe-icon" src="img/recipe.svg" alt="recipe icon" title="Get recipes">
+        </div>
       </div>
     </section>
 
@@ -223,6 +242,7 @@
   <script src="js/Models/Nutrition.js"></script>
   <script src="js/Models/Input.js"></script>
   <script src="js/Models/ManualInput.js"></script>
+  <script src="js/Models/Charts.js"></script>
   <script src="js/Collections/Dates.js"></script>
   <script src="js/Collections/Foods.js"></script>
   <script src="js/Collections/FoodResults.js"></script>
@@ -235,6 +255,7 @@
   <script src="js/Views/AppView.js"></script>
   <script src="js/Views/ResultsView.js"></script>
   <script src="js/Views/NutritionView.js"></script>
+  <script src="js/Views/ChartsView.js"></script>
   <script src="js/app.js"></script>
 
   <script src="http://d3js.org/d3.v3.min.js"></script>

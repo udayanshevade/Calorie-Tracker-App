@@ -9,7 +9,8 @@ app.AppView = Backbone.View.extend({
     'click #count-container': 'toggleCalorieMode',
     'click .foods-expand-toggle': 'expandFoods',
     'click .clear-foods': 'clearFoods',
-    'click .add-toggle': 'openManualAdd',
+    'click .manual-toggle': 'openManualAdd',
+    'click .charts-toggle': 'openCharts',
     'change #header-date': 'changeDate',
   },
 
@@ -27,6 +28,10 @@ app.AppView = Backbone.View.extend({
 
     app.calorieCountView = new app.CalorieCountView({
       'model': app.calorieCount
+    });
+
+    app.chartsView = new app.ChartsView({
+      'model': app.charts
     });
 
     this.$calories = this.$el.find('#count');
@@ -117,6 +122,10 @@ app.AppView = Backbone.View.extend({
 
   'openManualAdd': function() {
     app.manualInput.openManualMode();
+  },
+
+  'openCharts': function() {
+    app.charts.open();
   },
 
   'switchDateData': function(date) {
