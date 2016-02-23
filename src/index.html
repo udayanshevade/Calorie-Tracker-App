@@ -23,7 +23,7 @@
 
   <main id="main">
     <header id="header">
-      <h1 class="header-text" id="header-title">The Fit List</h1>
+      <a class="header-link" href=""><h1 class="header-text" id="header-title">The Fit List</h1></a>
       <h2 class="header-text" id="header-welcome">Welcome</h2>
       <div class="header-date-content">
         <input type="text" class="date-input" id="header-date">
@@ -86,7 +86,13 @@
         <div class="charts-inner-wrapper">
           <img class="close-charts" src="img/cross-white.svg" alt="close charts tray">
           <div class="calorie-radial-container"></div>
-          <div class="calorie-graph-container"></div>
+          <div class="calorie-graph-container">
+            <div class="period-buttons-container">
+              <h4 class="period-toggle weekly period-selected">Weekly</h4>
+              <h4 class="period-toggle monthly">Monthly</h4>
+              <h4 class="period-toggle yearly">Yearly</h4>
+            </div>
+          </div>
         </div>
         <div class="charts-toggle option-toggle">
           <span class="toggle-text">charts</span>

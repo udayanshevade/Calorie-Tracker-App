@@ -30,10 +30,6 @@ app.AppView = Backbone.View.extend({
       'model': app.calorieCount
     });
 
-    app.chartsView = new app.ChartsView({
-      'model': app.charts
-    });
-
     this.$calories = this.$el.find('#count');
     this.$user = this.$el.find('#user');
     this.$date = this.$el.find('#header-date');
@@ -55,6 +51,12 @@ app.AppView = Backbone.View.extend({
     this.listenTo(app.foods, 'reset', this.addAll);
     this.listenTo(app.foods, 'update', this.updateFoods);
 
+    app.chartsView = new app.ChartsView({
+      'model': app.charts
+    });
+
+    app.chartsView.initializeGraph();
+
     app.dates.fetch({'reset': true});
 
     this.$datePicker = this.$date.pikaday({
@@ -64,6 +66,7 @@ app.AppView = Backbone.View.extend({
     });
 
     this.render();
+
   },
 
   'render': function() {
@@ -84,6 +87,7 @@ app.AppView = Backbone.View.extend({
     app.calorieCount.updateCalories();
     this.updateDate();
     app.chartsView.updateArc();
+    app.chartsView.updateGraph('weekly');
   },
 
   'checkListLength': function() {

@@ -5,7 +5,8 @@ var app = app || {};
 app.Charts = Backbone.Model.extend({
 
   'defaults': {
-    'visible': false
+    'visible': false,
+    'period': 'weekly'
   },
 
   'open': function() {
