@@ -40,6 +40,7 @@ app.InputView = Backbone.View.extend({
 
   'closeSearchMode': function() {
     this.model.closeSearchMode();
+    this.$input.blur();
   },
 
   'fetchData': function() {

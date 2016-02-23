@@ -6,6 +6,10 @@ app.DateView = Backbone.View.extend({
 
   'el': $('#header-date'),
 
+  'events': {
+    'keydown .date-input': 'escape'
+  },
+
   'initialize': function() {
     this.date = this.model.get('date');
   },
@@ -24,6 +28,12 @@ app.DateView = Backbone.View.extend({
     this.$el.empty().off();
     this.stopListening();
     return this;
+  },
+
+  'escape': function(e) {
+    if (e.which === ESC_KEY) {
+      this.$el.find('.date-input').blur();
+    }
   }
 
 });

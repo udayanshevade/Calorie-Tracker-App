@@ -5,10 +5,6 @@ app.ResultsView = Backbone.View.extend({
 
   'el': $('.search-results'),
 
-  'events': {
-    //
-  },
-
   'initialize': function() {
     this.$foodsContainer = this.$el.find('.foods');
     this.$foodsTitle = this.$foodsContainer.find('.results-title');

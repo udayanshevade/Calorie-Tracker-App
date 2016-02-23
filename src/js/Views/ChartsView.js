@@ -129,9 +129,11 @@ app.ChartsView = Backbone.View.extend({
   'initializeGraph': function() {
     var that = this;
     var containerHeight = this.$graphContainer.height();
+    var containerWidth = this.$graphContainer.width();
 
+    var mUnit = containerWidth / 100;
     var margin = {'top': 50, 'right': 20, 'bottom': 50, 'left': 50};
-    this.graphWidth = 500 - margin.left - margin.right,
+    this.graphWidth = containerWidth - margin.left - margin.right,
     this.graphHeight = containerHeight - margin.top - margin.bottom;
 
     this.dateFormat = d3.time.format('%a %b %d %Y');
@@ -145,6 +147,11 @@ app.ChartsView = Backbone.View.extend({
     this.graphLine = d3.svg.line()
       .x(function(d) { for (var k in d) { return that.graphScaleX(that.dateFormat.parse(k)); } })
       .y(function(d) { for (var k in d) { return that.graphScaleY(d[k]);} });
+
+    var existingGraph = d3.select('.calorie-graph-container svg');
+    if (existingGraph) {
+      existingGraph.remove();
+    }
 
     this.graphSVG = d3.select('.calorie-graph-container')
       .insert('svg', '.period-buttons-container')
@@ -160,8 +167,6 @@ app.ChartsView = Backbone.View.extend({
     var period = this.model.get('period');
 
     var data = this.harvestData(period);
-
-    console.log(period);
 
     this.graphScaleX.domain(d3.extent(data.map(function(d) { for (var k in d) { return that.dateFormat.parse(k); } })));
 
@@ -235,7 +240,7 @@ app.ChartsView = Backbone.View.extend({
     switch(period) {
       case 'weekly':
         this.xTicks = 7;
-        this.labelFormat = d3.time.format('%a');
+        this.labelFormat = d3.time.format('%a %e');
         rangeDate.setDate(rangeDate.getDate() - 3);
         endDate.setDate(endDate.getDate() + 3);
         break;
@@ -322,6 +327,11 @@ app.ChartsView = Backbone.View.extend({
     $('.period-toggle').each(function(i) {
       $(this).toggleClass('period-selected', $(this).hasClass(that.model.get('period')));
     });
+  },
+
+  'resize': function() {
+    this.initializeGraph();
+    this.updateGraph('weekly');
   }
 
 });

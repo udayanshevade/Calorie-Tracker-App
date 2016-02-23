@@ -44,6 +44,13 @@ app.AppView = Backbone.View.extend({
       'suffix': '?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=419ba5cc&appKey=d84b29e2533c00844b6d2ceccba5cf46'
     };
 
+    this.NYTrecipesAPI = {
+      'base': 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=',
+      'material': 'recipe',
+      'fl': 'headline,web_url,snippet',
+      'key': 'af9d4045b433bc4e7da6f74eba5e7f3d:4:73466726'
+    };
+
     this.listenTo(app.dates, 'reset', this.changeDate);
     this.listenTo(app.dates, 'add', this.newDate);
 
@@ -65,7 +72,15 @@ app.AppView = Backbone.View.extend({
       'maxDate': new Date()
     });
 
+    app.recipeResultsView = new app.RecipeResultsView({
+      'model': app.recipeInput
+    });
+
     this.render();
+
+    $(window).on('resize', function() {
+      app.chartsView.resize();
+    });
 
   },
 
@@ -86,8 +101,6 @@ app.AppView = Backbone.View.extend({
     this.checkListLength();
     app.calorieCount.updateCalories();
     this.updateDate();
-    app.chartsView.updateArc();
-    app.chartsView.updateGraph('weekly');
   },
 
   'checkListLength': function() {
@@ -110,6 +123,10 @@ app.AppView = Backbone.View.extend({
   'updateDate': function() {
     app.date.updateCalories();
     app.date.updateFoods();
+    if (app.charts.get('visible')) {
+      app.chartsView.updateArc();
+      app.chartsView.updateGraph('weekly');
+    }
   },
 
   'toggleCalorieMode': function() {
