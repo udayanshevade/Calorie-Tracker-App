@@ -44,11 +44,10 @@ app.AppView = Backbone.View.extend({
       'suffix': '?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=419ba5cc&appKey=d84b29e2533c00844b6d2ceccba5cf46'
     };
 
-    this.NYTrecipesAPI = {
-      'base': 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=',
-      'material': 'recipe',
-      'fl': 'headline,web_url,snippet',
-      'key': 'af9d4045b433bc4e7da6f74eba5e7f3d:4:73466726'
+    this.yummlyAPI = {
+      'base': 'http://api.yummly.com/v1/api/',
+      'id': '9dd4fc11',
+      'key': 'acd4fafee10e5012ab431021bdaa2dd3'
     };
 
     this.listenTo(app.dates, 'reset', this.changeDate);

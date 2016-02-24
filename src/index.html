@@ -113,13 +113,21 @@
           </form>
           <section class="recipe-results">
             <div class="results-container recipes">
-              <h5 class="results-title"></h5>
-              <ul class="result-items" id="recipes-list">
-                <!-- Populate with recipe results -->
-              </ul>
+              <div class="results-inner-container recipes-list-container">
+                <h5 class="results-title"></h5>
+                <ul class="result-items" id="recipes-list">
+                  <!-- Populate with recipe results -->
+                </ul>
+              </div>
+              <div class="results-inner-container recipe-details-container">
+                <!-- Container for recipe details -->
+              </div>
             </div>
           </section>
           <img class="close-recipes close-icon" src="img/close.svg" alt="close icon">
+          <div class="yummly-attribution">
+            Recipe search powered by <a href='http://www.yummly.com/recipes'><img alt='Yummly' src='http://static.yummly.com/api-logo.png'/></a>
+          </div>
         </div>
         <div class="recipes-toggle option-toggle">
           <span class="toggle-text">recipes</span>
@@ -179,13 +187,60 @@
   <!-- Recipe Result -->
   <script type="text/template" id="recipe-result-template">
     <div class="recipe-result result">
+      <% if (img) { %>
+        <img class="recipe-pic" src="<%= img %>" alt="Image of <%= title %>">
+      <% } %>
       <div class="recipe-info-container">
-        <a class="recipe-link" href="<%= web_url %>">
-          <h5 class="recipe-title"> <%= headline.name %> </h5>
-          <h6 class="recipe-subtitle"> <%= headline.main %></h6>
-          <p class="recipe-snippet"><%= snippet %></p>
-          <span class="recipe-more">see more</span>
-        </a>
+        <h5 class="recipe-title"> <%= title %> </h5>
+        <h6 class="recipe-source"> <%= source %></h6>
+        <ul class="recipe-ingredients">
+          <% _.each(ingredients, function(ingredient) { %>
+            <li class="recipe-ingredient"> <%= ingredient %> </li>
+          <% }); %>
+        </ul>
+        <span class="recipe-more">click to see more</span>
+      </div>
+    </div>
+  </script>
+
+  <!-- Recipe Details Template -->
+
+  <script type="text/template" id="recipe-details-template">
+    <div class="recipe-details-wrapper">
+      <div class="recipe-details">
+        <div class="recipe-header">
+          <img class="close-details" src="img/cross-white.svg" alt="Close Icon">
+          <div class="recipe-header-text">
+            <h5 class="recipe-title"><%= title %></h5>
+            <a class="recipe-link" href="<%= sourceURL %>">
+              <h6 class="recipe-source"><%= source %></h6>
+            </a>
+          </div>
+          <div class="recipe-header-pic">
+            <% if (img) { %>
+              <img class="recipe-pic" alt="A photo of <%=title%>" src="<%= img %>">
+            <% } %>
+          </div>
+        </div>
+        <div class="recipe-stats">
+          <h6 class="recipe-time"> takes: <%= time %> </h6>
+          <% if (yield) { %>
+            <h6 class="recipe-yield"> servings: <%= yield %> </h6>
+          <% } %>
+        </div>
+        <div class="recipe-body">
+          <ul class="details-ingredients">
+            <% _.each(ingredients, function(ingredient) { %>
+              <li class="details-ingredient"> <%= ingredient %> </li>
+            <% }); %>
+          </ul>
+          <% if (flavors) { %>
+            <div class="radar-chart-container">
+              <!-- radar chart for flavors -->
+            </div>
+          <% } %>
+        </div>
+        <div class="details-attribution"> <%= yummly %></div>
       </div>
     </div>
   </script>
@@ -283,6 +338,7 @@
   <script src="js/Models/FoodResult.js"></script>
   <script src="js/Models/RecipeInput.js"></script>
   <script src="js/Models/RecipeResult.js"></script>
+  <script src="js/Models/Recipe.js"></script>
   <script src="js/Models/Nutrition.js"></script>
   <script src="js/Models/Input.js"></script>
   <script src="js/Models/ManualInput.js"></script>
@@ -301,6 +357,7 @@
   <script src="js/Views/AppView.js"></script>
   <script src="js/Views/ResultsView.js"></script>
   <script src="js/Views/RecipeResultsView.js"></script>
+  <script src="js/Views/RecipeView.js"></script>
   <script src="js/Views/NutritionView.js"></script>
   <script src="js/Views/ChartsView.js"></script>
   <script src="js/app.js"></script>

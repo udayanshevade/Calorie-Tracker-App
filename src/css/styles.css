@@ -319,6 +319,7 @@ body {
 
 .results-title {
   margin: 0.5rem 0;
+  padding-left: 1rem;
   color: #fff;
   font-size: 1.6rem;
   letter-spacing: 0.05rem;
@@ -330,21 +331,21 @@ body {
   position: relative;
   margin: 0;
   width: 100%;
-  height: 100%;
+  max-height: calc(100% - 3.5rem);
   list-style-type: none;
   padding-left: 0;
   overflow-y: auto;
 }
 
-.result-items {
-  max-height: calc(100% - 3rem);
+.recipes-open li {
+  padding: 1rem;
 }
 
 .open li,
 .recipes-open li,
 .main-foods-list li {
   position: relative;
-  margin: 1rem 0.5rem;
+  margin: 0.5rem 0.25rem;
 }
 
 .open li:first-of-type,
@@ -357,6 +358,11 @@ body {
 .recipes-open li:last-of-type,
 .main-foods-list li:last-of-type {
   margin-bottom: 0;
+}
+
+.recipe-ingredients li {
+  padding: 0.25rem;
+  margin: 0.25rem 0;
 }
 
 .open .result,
@@ -393,7 +399,12 @@ body {
   align-items: center;
 }
 
-.open .food-result.selected {
+.recipes-open .recipe-result {
+  justify-content: flex-start;
+}
+
+.open .food-result.selected,
+.recipes-open .recipe-result.selected {
   opacity: 1;
   box-shadow: 1px 4px 6px rgba(0,0,0,0.5);
 }
@@ -429,37 +440,45 @@ body {
   font-size: 2.35rem;
 }
 
-.nutrition-facts-container {
+.nutrition-facts-container,
+.recipe-details-container {
   position: absolute;
   display: none;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   opacity: 0;
-  background-image: #fff;
 }
 
-.nutrition-visible.nutrition-facts-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.nutrition-visible.nutrition-facts-container,
+.recipe-visible.recipe-details-container {
   background-color: rgba(0,0,0,0.75);
   z-index: 20;
   overflow-y: auto;
+}
+
+.recipe-details-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-right: 1rem;
+  min-height: 100%;
 }
 
 .nutrition-facts-container::-webkit-scrollbar {
   width: 1rem;
 }
 
-.nutrition-facts-container:-webkit-scrollbar-track {
-  box-shadow: 0;
+.nutrition-facts-container::-webkit-scrollbar-track {
+  box-shadow: none;
 }
 
-.nutrition-facts-container:-webkit-scrollbar-thumb {
+.nutrition-facts-container::-webkit-scrollbar-thumb {
   background-color: #333;
 }
 
@@ -477,9 +496,11 @@ body {
   border-bottom: 5px solid #111;
 }
 
-.close-nutrition {
+.close-nutrition,
+.close-details {
   display: inline;
   width: 1.5rem;
+  height: 1.5rem;
   padding: 0.25rem;
 }
 
@@ -1137,6 +1158,73 @@ svg {
   border-bottom: 1px solid lightgreen;
 }
 
+.recipe-info-container {
+  padding-left: 1rem;
+  width: calc(100% - 100px);
+}
+
+.recipe-title {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.recipe-source {
+  font-weight: lighter;
+  margin: 0.25rem 0 1rem;
+  font-size: 1.5rem;
+}
+
+.recipe-ingredients {
+  font-size: 1.35rem;
+  font-style: italic;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.recipe-more {
+  display: block;
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+.yummly-attribution {
+  background-color: #fff;
+  border-radius: 1px;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+  position: absolute;
+  padding: 1rem 0 1rem 0.5rem;
+  right: 0;
+  bottom: 0;
+}
+
+.recipe-details {
+  width: 100%;
+  background-color: #e7e7e7;
+  border-radius: 2px;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.4);
+}
+
+.recipe-header {
+  background-color: #3a3a3a;
+}
+
+.recipe-header-text {
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 50%;
+  align-self: center;
+  text-align: center;
+}
+
+.recipe-header-text .recipe-title {
+  color: #fff;
+}
+
 .recipe-link {
   text-decoration: none;
 }
@@ -1145,36 +1233,69 @@ svg {
 .recipe-link:hover,
 .recipe-link:active,
 .recipe-link:visited {
-  color: #222;
+  color: #e16100;
 }
 
-.recipe-title {
-  margin: 0.25rem 0;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-
-.recipe-subtitle {
-  font-weight: lighter;
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.recipe-snippet {
-  font-size: 1.35rem;
-  font-weight: bold;
-  letter-spacing: 0.1rem
-}
-
-.recipe-results {
+.recipe-header-pic {
   margin: 0 auto;
-  max-width: 100%;
-  width: 600px;
-  text-align: center;
+  width: 50%;
+  align-self: center;
 }
 
-.recipe-more {
-  font-size: 1.15rem;
+.recipe-pic {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.recipe-stats {
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-time,
+.recipe-yield {
+  margin: 1rem;
+  font-size: 1.5rem;
+  font-variant: small-caps;
+  text-align: center;
+  width: 100%;
+}
+
+.details-ingredients {
+  list-style: none;
+  width: 100%;
+  padding-left: 0;
+}
+
+.details-ingredients li:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+.details-ingredients li:nth-child(even) {
+  background-color: #eee;
+}
+
+.details-ingredients li {
+  margin: 0;
+}
+
+.details-ingredient {
+  font-size: 1.45rem;
+}
+
+.radar-chart .area {
+  opacity: 0.7;
+  fill: #dcedc8;
+}
+
+.close-details {
+  float: left;
+}
+
+.details-attribution {
+  margin: 1rem 0;
+  padding: 1rem 0;
   text-align: right;
 }
 
@@ -1254,19 +1375,22 @@ svg {
 
   .result-items::-webkit-scrollbar,
   .main-foods-list::-webkit-scrollbar,
-  .charts-inner-wrapper::-webkit-scrollbar {
+  .charts-inner-wrapper::-webkit-scrollbar,
+  .recipe-details-container::-webkit-scrollbar {
     width: 1rem;
   }
 
   .result-items::-webkit-scrollbar-track,
   .main-foods-list::-webkit-scrollbar-track,
-  .charts-inner-wrapper::-webkit-scrollbar-track {
-    box-shadow: 0;
+  .charts-inner-wrapper::-webkit-scrollbar-track,
+  .recipe-details-container::-webkit-scrollbar-track {
+    box-shadow: none;
   }
 
   .result-items::-webkit-scrollbar-thumb,
   .main-foods-list::-webkit-scrollbar-thumb,
-  .charts-inner-wrapper::-webkit-scrollbar-thumb {
+  .charts-inner-wrapper::-webkit-scrollbar-thumb,
+  .recipe-details-container::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border: 1px outset #666;
   }
@@ -1287,7 +1411,8 @@ svg {
     box-shadow: 1px 2px 6px rgba(0,0,0,0.5);
   }
 
-  .nutrition-visible.nutrition-facts-container {
+  .nutrition-visible.nutrition-facts-container,
+  .recipe-visible.recipe-details-container {
     background-color: transparent;
     position: relative;
     left: auto;
@@ -1299,7 +1424,8 @@ svg {
   }
 
   .add-button,
-  .close-nutrition {
+  .close-nutrition,
+  .close-details {
     cursor: pointer;
   }
 
@@ -1313,6 +1439,27 @@ svg {
 
   .item .food-brand {
     font-size: 1.5rem;
+  }
+
+  .recipe-ingredients {
+    flex-flow: row wrap;
+  }
+
+  .recipe-ingredient {
+    width: 30%;
+  }
+
+  .recipe-time,
+  .recipe-yield {
+    width: 50%;
+  }
+
+  .details-ingredients {
+    width: 50%;
+  }
+
+  .recipe-header {
+    display: flex;
   }
 
 }
@@ -1346,7 +1493,8 @@ svg {
     width: 500px;
   }
 
-  .nutrition-visible.nutrition-facts-container {
+  .nutrition-visible.nutrition-facts-container,
+  .recipe-visible.recipe-details-container {
     display: block;
   }
 
@@ -1424,7 +1572,8 @@ svg {
     margin-right: 2rem;
   }
 
-  .open .results-container {
+  .open .results-container,
+  .recipes-open .results-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1441,7 +1590,8 @@ svg {
     text-align: left;
   }
 
-  .nutrition-visible.nutrition-facts-container {
+  .nutrition-visible.nutrition-facts-container,
+  .recipe-visible.recipe-details-container {
     display: flex;
   }
 

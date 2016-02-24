@@ -34,23 +34,36 @@ app.RecipeResultsView = Backbone.View.extend({
     var that = this;
     this.$recipesList.html('');
 
-    var apiData = app.appView.NYTrecipesAPI;
+    var apiData = app.appView.yummlyAPI;
+    var url = apiData.base + 'recipes';
 
-    $.getJSON(apiData.base, {
+    $.getJSON(url, {
       'q': val,
-      'fq': 'type_of_material:(' + apiData.material + ')',
-      'fl': apiData.fl,
-      'api-key': apiData.key
+      '_app_id': apiData.id,
+      '_app_key': apiData.key
     }).done(function(data) {
 
-      var docs = data.response.docs;
+      var matches = data.matches;
 
-      if (docs.length) {
+      if (matches.length) {
+
+        $('.recipes-list-container').css('background-color', 'rgba(0,0,0,0.4');
 
         that.$el.find('.results-title').html('recipe results:');
 
-        docs.forEach(function(result, i) {
-          app.recipeResults.add(result);
+        var obj = {};
+        var recipeData;
+
+        matches.forEach(function(result, i) {
+          obj = {
+            'title': result.recipeName,
+            'time': result.totalTimeInSeconds,
+            'source': result.sourceDisplayName,
+            'ingredients': result.ingredients,
+            'id': result.id
+          };
+          if (result.imageUrlsBySize) obj.img = result.imageUrlsBySize['90'];
+          app.recipeResults.add(obj);
         });
 
       } else {
@@ -72,6 +85,10 @@ app.RecipeResultsView = Backbone.View.extend({
 
   'recipesErrorDisplay': function() {
     this.$el.find('.results-title').html('No matching recipes could be found at this time. Please try again later, or use a different search.');
+  },
+
+  'recipeErrorDisplay': function() {
+    //
   },
 
   'openRecipesMode': function() {
