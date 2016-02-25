@@ -9,13 +9,13 @@ var app = app || {};
       'visible': false
     },
 
-    openManualMode: function() {
+    'openManualMode': function() {
       this.set({
         'visible': true
       });
     },
 
-    closeManualMode: function() {
+    'closeManualMode': function() {
       this.set({
         'visible': false
       });

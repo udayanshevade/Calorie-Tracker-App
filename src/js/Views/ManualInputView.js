@@ -77,7 +77,13 @@ app.ManualInputView = Backbone.View.extend({
   },
 
   'manualAddError': function() {
-    console.log('not so fast criminal scum');
+    var that = this;
+    $('.manual-add-error').addClass('error');
+    setTimeout(that.clearError, 1500);
+  },
+
+  'clearError': function() {
+    $('.manual-add-error').removeClass('error');
   },
 
   'escape': function(e) {

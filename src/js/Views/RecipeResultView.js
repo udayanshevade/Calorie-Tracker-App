@@ -31,6 +31,22 @@ app.RecipeResultView = Backbone.View.extend({
         '_app_key': apiData.key
       }).done(function(data) {
 
+        var flavors = {};
+
+        for (var flavor in data.flavors) {
+          switch (flavor) {
+            case 'Piquant':
+              flavors.Spicy = data.flavors[flavor];
+              break;
+            case 'Meaty':
+              flavors.Savory = data.flavors[flavor];
+              break;
+            default:
+              flavors[flavor] = data.flavors[flavor];
+              break;
+          }
+        }
+
         var obj = {
           'title': data.name,
           'img': data.images[0].hostedLargeUrl,
@@ -40,7 +56,7 @@ app.RecipeResultView = Backbone.View.extend({
           'sourceURL': data.source.sourceRecipeUrl,
           'ingredients': data.ingredientLines,
           'yummly': data.attribution.html,
-          'flavors': data.flavors
+          'flavors': flavors
         };
 
         app.recipe.recipeOpen();

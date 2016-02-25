@@ -47,7 +47,7 @@ app.RecipeResultsView = Backbone.View.extend({
 
       if (matches.length) {
 
-        $('.recipes-list-container').css('background-color', 'rgba(0,0,0,0.4');
+        $('.recipes-open .results-inner-container').css('background-color', 'rgba(0,0,0,0.4');
 
         that.$el.find('.results-title').html('recipe results:');
 

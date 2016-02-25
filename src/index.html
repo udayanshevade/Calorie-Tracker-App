@@ -75,6 +75,7 @@
               <input class="manual-input manual-calories" type="text" placeholder="calories">
               <input class="manual-input manual-item" type="text" placeholder="name">
               <input class="manual-input manual-brand" type="text" placeholder="brand">
+              <p class="manual-add-error">Please fill all fields correctly.</p>
               <button class="manual-submit">
                 <span class="manual-submit-text">add</span>
               </button>
@@ -229,16 +230,16 @@
           <% } %>
         </div>
         <div class="recipe-body">
+          <% if (flavors) { %>
+            <div class="flavors-chart-container">
+              <!-- radar chart for flavors -->
+            </div>
+          <% } %>
           <ul class="details-ingredients">
             <% _.each(ingredients, function(ingredient) { %>
               <li class="details-ingredient"> <%= ingredient %> </li>
             <% }); %>
           </ul>
-          <% if (flavors) { %>
-            <div class="radar-chart-container">
-              <!-- radar chart for flavors -->
-            </div>
-          <% } %>
         </div>
         <div class="details-attribution"> <%= yummly %></div>
       </div>
@@ -331,6 +332,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="js/Lib/radar-chart.min.js"></script>
   <!-- app JS -->
   <script src="js/Models/Date.js"></script>
   <script src="js/Models/CalorieCount.js"></script>
