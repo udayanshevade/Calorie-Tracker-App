@@ -411,7 +411,7 @@ body {
 .count-mode-icon {
   font-size: 2.25rem;
   padding: 1rem;
-  margin-right: 1rem;
+  margin-right: 0.25rem;
   transition: transform 0.2s;
 }
 
