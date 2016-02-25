@@ -522,6 +522,7 @@ body {
 
 .nutrition-visible.nutrition-facts-container,
 .recipe-visible.recipe-details-container {
+  display: block;
   background-color: rgba(0,0,0,0.75);
   z-index: 20;
   overflow-y: auto;
@@ -537,6 +538,7 @@ body {
   width: 100%;
   padding: 1rem 1rem 1rem 2rem;
   min-height: 100%;
+  background-color: rgba(0,0,0,0.75);
 }
 
 .nutrition-facts-container::-webkit-scrollbar {
@@ -572,6 +574,7 @@ body {
   height: 1.5rem;
   padding: 0.25rem;
   margin: 0.5rem;
+  position: absolute;
 }
 
 .nutrition-title {
@@ -720,7 +723,7 @@ td {
 #main-foods-container {
   width: 250px;
   position: absolute;
-  top: calc(45% + 6rem);
+  top: calc(42% + 5rem);
   left: calc(50% - 125px);
   padding: 0.5rem;
   border-radius: 1px;
@@ -774,7 +777,7 @@ td {
   margin: 0.25rem 1rem;
   display: none;
   padding: 0.25rem;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   text-transform: uppercase;
   color: tomato;
 }
@@ -957,7 +960,10 @@ td {
 .manual-add-error {
   opacity: 0;
   color: tomato;
+  font-size: 1.5rem;
+  font-variant: small-caps;
   transition: opacity 0.3s;
+  margin: 1rem 0;
 }
 
 .error.manual-add-error {
@@ -1222,13 +1228,13 @@ svg {
     ),
     url(../img/more-food.jpg);
   background-size: cover;
-  transition: opacity 0.2s;
 }
 
 .recipes-open .recipes-inner-wrapper {
   opacity: 1;
   z-index: 25;
   width: 100%;
+  transition: opacity 0.2s;
 }
 
 #recipes-form {
@@ -1316,7 +1322,7 @@ svg {
 
 .recipe-header-pic {
   margin: 0 auto;
-  width: 50%;
+  width: 100%;
   align-self: center;
 }
 
@@ -1415,24 +1421,16 @@ svg {
   }
 }
 
+@media screen and (min-height: 1000px) {
+  .foods-populated#main-foods-container {
+    top: calc(45% + 6rem);
+  }
+}
+
 @media screen and (min-width: 650px) {
 
   #count-container {
     left: calc(50% - 100px);
-  }
-
-  .options-wrapper {
-    flex-direction: row;
-    top: calc(45% - 50px);
-  }
-
-  .toggle-text {
-    padding-left: 1rem;
-    display: inline-block;
-  }
-
-  .option-icon {
-    margin-left: 0.5rem;
   }
 
   #search-input,
@@ -1566,11 +1564,45 @@ svg {
     display: flex;
   }
 
+  .recipe-header-pic {
+    width: 100%;
+  }
+
   .recipe-body {
     display: flex;
     justify-content: center;
   }
 
+}
+
+@media screen and (min-width: 750px) {
+  .options-wrapper {
+    flex-direction: row;
+    top: calc(45% - 50px);
+  }
+
+  .toggle-text {
+    padding-left: 1rem;
+    display: inline-block;
+  }
+
+  .option-icon {
+    margin-left: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 650px) and (max-height: 500px) {
+  .open .results-container,
+  .recipes-open .results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .results-inner-container {
+    height: 80%;
+    width: calc(50% - 1rem);
+  }
 }
 
 @media screen and (min-width: 650px) and (max-width: 950px) {
@@ -1579,13 +1611,6 @@ svg {
     width: 400px;
     height: 50px;
     left: calc(50% - 200px);
-  }
-
-  .options-wrapper {
-    width: 400px;
-    left: calc(50% - 200px);
-    top: calc(45% - 65px);
-    justify-content: space-between;
   }
 
   #main-foods-container {

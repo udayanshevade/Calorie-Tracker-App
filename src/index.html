@@ -75,7 +75,7 @@
               <input class="manual-input manual-calories" type="text" placeholder="calories">
               <input class="manual-input manual-item" type="text" placeholder="name">
               <input class="manual-input manual-brand" type="text" placeholder="brand">
-              <p class="manual-add-error">Please fill all fields correctly.</p>
+              <p class="manual-add-error">please fill all fields correctly</p>
               <button class="manual-submit">
                 <span class="manual-submit-text">add</span>
               </button>
@@ -83,7 +83,7 @@
           </form>
         </div>
         <div class="manual-toggle option-toggle">
-          <span class="toggle-text">manual add</span>
+          <span class="toggle-text">add</span>
           <img class="option-icon add-icon" src="img/plus.svg" alt="add icon" title="Manually add calories">
         </div>
       </section>
@@ -193,7 +193,7 @@
       <% } %>
       <div class="recipe-info-container">
         <h5 class="recipe-title"> <%= title %> </h5>
-        <h6 class="recipe-source"> <%= source %></h6>
+        <h6 class="recipe-source"> Provided by <%= source %></h6>
         <ul class="recipe-ingredients">
           <% _.each(ingredients, function(ingredient) { %>
             <li class="recipe-ingredient"> <%= ingredient %> </li>
@@ -214,7 +214,7 @@
           <div class="recipe-header-text">
             <h5 class="recipe-title"><%= title %></h5>
             <a class="recipe-link" href="<%= sourceURL %>">
-              <h6 class="recipe-source"><%= source %></h6>
+              <h6 class="recipe-source">Provided by <%= source %></h6>
             </a>
           </div>
           <div class="recipe-header-pic">
@@ -230,7 +230,7 @@
           <% } %>
         </div>
         <div class="recipe-body">
-          <% if (flavors) { %>
+          <% if (!(_.isEmpty(flavors))) { %>
             <div class="flavors-chart-container">
               <!-- radar chart for flavors -->
             </div>

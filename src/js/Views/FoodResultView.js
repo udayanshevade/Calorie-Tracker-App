@@ -70,7 +70,9 @@ app.FoodResultView = Backbone.View.extend({
 
     this.$el.find('.quick-add').addClass('added').delay(1500)
       .queue(function() {
-        $(this).removeClass('added').dequeue();
+        $(this).removeClass('added')
+        $(this).dequeue();
+        app.inputView.closeSearchMode();
       });
 
     return false;

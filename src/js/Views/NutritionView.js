@@ -60,10 +60,10 @@ app.NutritionView = Backbone.View.extend({
 
     this.$el.find('.slow-add').addClass('added').delay(1500)
       .queue(function() {
-        $(this).removeClass('added').dequeue();
+        $(this).removeClass('added');
+        $(this).dequeue();
+        app.inputView.closeSearchMode();
       });
-
-
   },
 
   'checkFoods': function() {

@@ -45,11 +45,11 @@ app.RecipeView = Backbone.View.extend({
 
     if (this.svg) {
       this.svg.remove();
-    } else {
-      this.svg = d3.select('.flavors-chart-container').append('svg');
     }
 
-    this.svg.attr('width', that.chartSide).attr('height', that.chartSide);
+    this.svg = d3.select('.flavors-chart-container').append('svg')
+      .attr('width', that.chartSide)
+      .attr('height', that.chartSide);
   },
 
   'renderFlavors': function() {
