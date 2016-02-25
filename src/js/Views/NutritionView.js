@@ -55,6 +55,9 @@ app.NutritionView = Backbone.View.extend({
         'item_amount': food.get('item_amount') + this.model.get('item_amount')
       });
     } else {
+      this.model.set({
+        'nf_calories': Math.ceil(this.model.get('nf_calories'))
+      })
       app.foods.add(this.model);
     }
 

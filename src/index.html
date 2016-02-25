@@ -4,30 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Health Tracker App</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet'>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/pikaday.css">
+  <!-- build:css css/styles.min.css -->
+    <link rel="stylesheet" href="css/styles.css">
+  <!-- /build -->
 </head>
 <body>
 
-  <aside class="background">
-    <picture class="background-image">
-      <source srcset="img/utensils.jpg 1x">
-      <img src="img/utensils.jpg" alt="Utensils and ingredients splayed in a preparatory manner.">
-    </picture>
-    <picture class="background-image">
-      <source srcset="img/food.jpg 1x">
-      <img src="img/food.jpg" alt="Close up on sliced avocado and mango.">
-    </picture>
-    <picture class="background-image">
-      <source srcset="img/more-food.jpg 1x">
-      <img src="img/more-food.jpg" alt="Close up on veggies.">
-    </picture>
-  </aside>
-
   <main id="main">
     <header id="header">
-      <a class="header-link" href=""><h1 class="header-text" id="header-title">The Fit List</h1></a>
+      <a class="header-link" href=""><h1 class="header-text" id="header-title">Fit List</h1></a>
       <h2 class="header-text" id="header-welcome">Welcome</h2>
       <div class="header-date-content">
         <input type="text" class="date-input" id="header-date">
@@ -35,7 +20,7 @@
     </header>
 
     <section id="count-container" title="Change count mode">
-      <img class="count-mode-icon" alt="count mode icon" src="img/down-triangle.svg">
+      <i class="fa fa-caret-down count-mode-icon"></i>
       <h3 class="header-text" id="count"></h3>
     </section>
 
@@ -43,7 +28,7 @@
       <div class="search-inner-container">
         <form id="search-form">
           <button id="search-submit">
-            <img class="search-icon" src="img/search.svg" alt="search icon">
+            <i class="fa fa-search search-icon"></i>
           </button>
           <input id="search-input" placeholder="Search brand or food..." autocomplete="off">
         </form>
@@ -61,17 +46,17 @@
           </div>
         </section>
       </div>
-      <img class="close-icon" id="close-search" src="img/close.svg" alt="close search icon">
+      <i class="fa fa-reply close-icon" id="close-search"></i>
     </section>
 
     <section class="options-wrapper">
       <section class="manual-add-wrapper">
         <div class="manual-add-inner-wrapper">
-          <img class="close-manual" src="img/cross-white.svg" alt="close manual add form">
+          <i class="fa fa-times close-manual"></i>
           <form class="manual-add-form">
             <div class="manual-add-inputs">
               <h6 class="manual-add-title">add your own calories</h6>
-              <input class="manual-input manual-amount" type="text" placeholder="amount">
+              <input class="manual-input manual-amount" type="text" placeholder="# servings">
               <input class="manual-input manual-calories" type="text" placeholder="calories">
               <input class="manual-input manual-item" type="text" placeholder="name">
               <input class="manual-input manual-brand" type="text" placeholder="brand">
@@ -83,13 +68,13 @@
           </form>
         </div>
         <div class="manual-toggle option-toggle">
-          <span class="toggle-text">add</span>
-          <img class="option-icon add-icon" src="img/plus.svg" alt="add icon" title="Manually add calories">
+          <span class="toggle-text">manual</span>
+          <i class="fa fa-plus option-icon add-icon" title="Manually add calories"></i>
         </div>
       </section>
       <section class="charts-wrapper">
         <div class="charts-inner-wrapper">
-          <img class="close-charts" src="img/cross-white.svg" alt="close charts tray">
+          <i class="fa fa-times close-charts"></i>
           <div class="calorie-radial-container"></div>
           <div class="calorie-graph-container">
             <div class="period-buttons-container">
@@ -101,14 +86,14 @@
         </div>
         <div class="charts-toggle option-toggle">
           <span class="toggle-text">charts</span>
-          <img class="option-icon charts-icon" src="img/charts.svg" alt="charts icon" title="Visualize trends">
+          <i class="fa fa-bar-chart option-icon charts-icon" title="Visualize trends"></i>
         </div>
       </section>
       <section class="recipes-wrapper">
         <div class="recipes-inner-wrapper">
           <form id="recipes-form">
             <button id="recipes-submit">
-              <img class="search-icon" src="img/search.svg" alt="">
+              <i class="fa fa-search search-icon"></i>
             </button>
             <input id="recipes-input" placeholder="Search recipes..." autocomplete="off">
           </form>
@@ -125,14 +110,14 @@
               </div>
             </div>
           </section>
-          <img class="close-recipes close-icon" src="img/close.svg" alt="close icon">
+          <i class="fa fa-reply close-icon close-recipes"></i>
           <div class="yummly-attribution">
             Recipe search powered by <a href='http://www.yummly.com/recipes'><img alt='Yummly' src='http://static.yummly.com/api-logo.png'/></a>
           </div>
         </div>
         <div class="recipes-toggle option-toggle">
           <span class="toggle-text">recipes</span>
-          <img class="option-icon recipe-icon" src="img/recipe.svg" alt="recipe icon" title="Get recipes">
+          <i class="fa fa-list option-icon recipe-icon" title="Get recipes"></i>
         </div>
       </section>
     </section>
@@ -141,7 +126,7 @@
       <h4 class="main-foods-title">no calories added for this date.</h4>
       <div class="foods-expand-toggle">
         <span class="foods-expand-text">expand list</span>
-        <img class="foods-expand-icon" src="img/expand.svg" alt="expand icon">
+        <i class="fa fa-chevron-down foods-expand-icon"></i>
       </div>
       <h4 class="clear-foods">clear all</h4>
       <ul class="main-foods-list">
@@ -166,13 +151,13 @@
         <h4 class="calorie-title">cals</h4>
       </div>
     </div>
-    <img class="remove-food" src="img/cross.svg" alt="close icon">
+    <i class="fa fa-times remove-food"></i>
   </script>
 
   <!-- Food Result -->
   <script type="text/template" id="food-result-template">
     <div class="food-result result">
-      <img class="eye" src="img/eye.svg" alt="Icon of an eye">
+      <i class="fa fa-info-circle info" title="Click for more info"></i>
       <div class="food-info">
         <h5 class="food-name"> <%= item_name %> </h5>
         <h6 class="food-brand"> <%= brand_name %> </h6>
@@ -210,7 +195,7 @@
     <div class="recipe-details-wrapper">
       <div class="recipe-details">
         <div class="recipe-header">
-          <img class="close-details" src="img/cross-white.svg" alt="Close Icon">
+          <i class="fa fa-times close-details"></i>
           <div class="recipe-header-text">
             <h5 class="recipe-title"><%= title %></h5>
             <a class="recipe-link" href="<%= sourceURL %>">
@@ -251,7 +236,7 @@
     <div class="nutrition-facts">
       <header class="nutrition-header">
         <h4 class="nutrition-title">Nutrition Facts</h4>
-        <img class="close-nutrition" src="img/cross.svg" alt="Close Icon">
+        <i class="fa fa-times close-nutrition"></i>
         <h5 class="item-name"> <%= item_name %> - <%= brand_name %> </h5>
         <span class="add-button slow-add">add</span>
         <input class="item-amount" type="number" min="1" value="<%= item_amount %>"><span> (<%= nf_serving_weight_grams * item_amount %>g) </span>
@@ -326,43 +311,54 @@
 
   <!-- lib CDN files -->
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="js/Lib/pikaday.js"></script>
-  <script src="js/Lib/pikaday.jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="js/Lib/radar-chart.min.js"></script>
-  <!-- app JS -->
-  <script src="js/Models/Date.js"></script>
-  <script src="js/Models/CalorieCount.js"></script>
-  <script src="js/Models/Food.js"></script>
-  <script src="js/Models/FoodResult.js"></script>
-  <script src="js/Models/RecipeInput.js"></script>
-  <script src="js/Models/RecipeResult.js"></script>
-  <script src="js/Models/Recipe.js"></script>
-  <script src="js/Models/Nutrition.js"></script>
-  <script src="js/Models/Input.js"></script>
-  <script src="js/Models/ManualInput.js"></script>
-  <script src="js/Models/Charts.js"></script>
-  <script src="js/Collections/Dates.js"></script>
-  <script src="js/Collections/Foods.js"></script>
-  <script src="js/Collections/FoodResults.js"></script>
-  <script src="js/Collections/RecipeResults.js"></script>
-  <script src="js/Views/DateView.js"></script>
-  <script src="js/Views/CalorieCountView.js"></script>
-  <script src="js/Views/FoodView.js"></script>
-  <script src="js/Views/InputView.js"></script>
-  <script src="js/Views/ManualInputView.js"></script>
-  <script src="js/Views/FoodResultView.js"></script>
-  <script src="js/Views/RecipeResultView.js"></script>
-  <script src="js/Views/AppView.js"></script>
-  <script src="js/Views/ResultsView.js"></script>
-  <script src="js/Views/RecipeResultsView.js"></script>
-  <script src="js/Views/RecipeView.js"></script>
-  <script src="js/Views/NutritionView.js"></script>
-  <script src="js/Views/ChartsView.js"></script>
-  <script src="js/app.js"></script>
-
+  <!-- build:js js/app.min.js -->
+    <script src="js/Lib/pikaday.js"></script>
+    <script src="js/Lib/pikaday.jquery.js"></script>
+    <script src="js/Lib/radar-chart.min.js"></script>
+    <script src="js/Models/Date.js"></script>
+    <script src="js/Models/CalorieCount.js"></script>
+    <script src="js/Models/Food.js"></script>
+    <script src="js/Models/FoodResult.js"></script>
+    <script src="js/Models/RecipeInput.js"></script>
+    <script src="js/Models/RecipeResult.js"></script>
+    <script src="js/Models/Recipe.js"></script>
+    <script src="js/Models/Nutrition.js"></script>
+    <script src="js/Models/Input.js"></script>
+    <script src="js/Models/ManualInput.js"></script>
+    <script src="js/Models/Charts.js"></script>
+    <script src="js/Collections/Dates.js"></script>
+    <script src="js/Collections/Foods.js"></script>
+    <script src="js/Collections/FoodResults.js"></script>
+    <script src="js/Collections/RecipeResults.js"></script>
+    <script src="js/Views/DateView.js"></script>
+    <script src="js/Views/CalorieCountView.js"></script>
+    <script src="js/Views/FoodView.js"></script>
+    <script src="js/Views/InputView.js"></script>
+    <script src="js/Views/ManualInputView.js"></script>
+    <script src="js/Views/FoodResultView.js"></script>
+    <script src="js/Views/RecipeResultView.js"></script>
+    <script src="js/Views/AppView.js"></script>
+    <script src="js/Views/ResultsView.js"></script>
+    <script src="js/Views/RecipeResultsView.js"></script>
+    <script src="js/Views/RecipeView.js"></script>
+    <script src="js/Views/NutritionView.js"></script>
+    <script src="js/Views/ChartsView.js"></script>
+    <script src="js/app.js"></script>
+  <!-- /build -->
+  <script>
+    var cb = function() {
+      var l = document.createElement('link'); l.rel = 'stylesheet';
+      l.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css';
+      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+        webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) raf(cb);
+    else window.addEventListener('load', cb);
+  </script>
 </body>
 </html>

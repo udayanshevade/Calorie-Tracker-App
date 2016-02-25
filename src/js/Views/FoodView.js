@@ -7,7 +7,6 @@ app.FoodView = Backbone.View.extend({
   'tagName': 'li',
 
   'events': {
-    'click': 'logModel',
     'click .remove-food': 'removeFood',
     'change .item-amount': 'updateAmount',
   },
@@ -23,10 +22,6 @@ app.FoodView = Backbone.View.extend({
   'render': function() {
     this.$el.html(this.template(this.model.attributes));
     return this;
-  },
-
-  'logModel': function() {
-    console.log(this.model);
   },
 
   'removeFood': function() {
