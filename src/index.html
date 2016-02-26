@@ -10,29 +10,39 @@
 </head>
 <body>
 
-  <main id="main">
+  <main id="main" class="loading">
+
+    <!-- loading -->
+    <div class="loading-overlay"></div>
+    <i class="fa fa-spinner spinner" data-bind="visible: loading"></i>
+
+    <!-- header -->
     <header id="header">
       <a class="header-link" href=""><h1 class="header-text" id="header-title">Fit List</h1></a>
       <h2 class="header-text" id="header-welcome">Welcome</h2>
+      <!-- Date / Calendar interface -->
       <div class="header-date-content">
         <input type="text" class="date-input" id="header-date">
       </div>
     </header>
 
+    <!-- Calorie Counter / Mode -->
     <section id="count-container" title="Change count mode">
       <i class="fa fa-caret-down count-mode-icon"></i>
       <h3 class="header-text" id="count"></h3>
     </section>
 
+    <!-- Main search container -->
     <section id="search-container">
       <div class="search-inner-container">
         <form id="search-form">
           <button id="search-submit">
             <i class="fa fa-search search-icon"></i>
           </button>
-          <input id="search-input" placeholder="Search brand or food..." autocomplete="off">
+          <input id="search-input" placeholder="Enter brand or food..." autocomplete="off">
         </form>
-        <section class="search-results">
+        <!-- Food Search Results -->
+        <section class="search-results food-results">
           <div class="results-container foods">
             <div class="results-inner-container">
               <h5 class="results-title"></h5>
@@ -48,11 +58,12 @@
       </div>
       <i class="fa fa-reply close-icon" id="close-search"></i>
     </section>
-
+    <!-- Extra options -->
     <section class="options-wrapper">
       <section class="manual-add-wrapper">
         <div class="manual-add-inner-wrapper">
           <i class="fa fa-times close-manual"></i>
+          <!-- Manual add form -->
           <form class="manual-add-form">
             <div class="manual-add-inputs">
               <h6 class="manual-add-title">add your own calories</h6>
@@ -67,11 +78,13 @@
             </div>
           </form>
         </div>
+        <!-- Manual mode toggle -->
         <div class="manual-toggle option-toggle">
           <span class="toggle-text">manual</span>
           <i class="fa fa-plus option-icon add-icon" title="Manually add calories"></i>
         </div>
       </section>
+      <!-- Charts section -->
       <section class="charts-wrapper">
         <div class="charts-inner-wrapper">
           <i class="fa fa-times close-charts"></i>
@@ -84,19 +97,23 @@
             </div>
           </div>
         </div>
+        <!-- Charts mode toggle -->
         <div class="charts-toggle option-toggle">
           <span class="toggle-text">charts</span>
           <i class="fa fa-bar-chart option-icon charts-icon" title="Visualize trends"></i>
         </div>
       </section>
+      <!-- Recipes section -->
       <section class="recipes-wrapper">
         <div class="recipes-inner-wrapper">
+          <!-- Recipe search -->
           <form id="recipes-form">
             <button id="recipes-submit">
               <i class="fa fa-search search-icon"></i>
             </button>
             <input id="recipes-input" placeholder="Search recipes..." autocomplete="off">
           </form>
+          <!-- Recipe results -->
           <section class="recipe-results">
             <div class="results-container recipes">
               <div class="results-inner-container recipes-list-container">
@@ -115,6 +132,7 @@
             Recipe search powered by <a href='http://www.yummly.com/recipes'><img alt='Yummly' src='http://static.yummly.com/api-logo.png'/></a>
           </div>
         </div>
+        <!-- Recipes mode toggle -->
         <div class="recipes-toggle option-toggle">
           <span class="toggle-text">recipes</span>
           <i class="fa fa-list option-icon recipe-icon" title="Get recipes"></i>
@@ -122,6 +140,7 @@
       </section>
     </section>
 
+    <!-- Added food items -->
     <section id="main-foods-container">
       <h4 class="main-foods-title">no calories added for this date.</h4>
       <div class="foods-expand-toggle">

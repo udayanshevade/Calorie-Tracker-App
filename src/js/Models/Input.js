@@ -1,28 +1,30 @@
 
 var app = app || {};
 
-(function() {
+/*
+ * Model for input logic
+ */
+app.Input = Backbone.Model.extend({
 
-  app.Input = Backbone.Model.extend({
-    defaults: {
-      'visible': false,
-    },
+  // default attributes
+  defaults: {
+    'visible': false,
+  },
 
-    openSearchMode: function() {
-      this.set({
-        'visible': true
-      });
-    },
+  // expands search mode
+  openSearchMode: function() {
+    this.set({
+      'visible': true
+    });
+  },
 
+  // collapses search mode
+  closeSearchMode: function() {
+    this.set({
+      'visible': false
+    });
+  }
 
-    closeSearchMode: function() {
-      this.set({
-        'visible': false
-      });
-    }
+});
 
-  });
-
-  app.input = new app.Input();
-
-})();
+app.input = new app.Input();

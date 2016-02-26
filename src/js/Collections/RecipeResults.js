@@ -1,9 +1,13 @@
 
 var app = app || {};
 
+/*
+ * Recipe result view
+ */
 app.RecipeResults = Backbone.Collection.extend({
 
-  'model': app.Recipe,
+  // uses model recipe
+  'model': app.RecipeResult,
 
 });
 

@@ -294,11 +294,14 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 
 /* CUSTOM STYLES */
 
+/* Normalizatifying styles */
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
 
+/* full body app */
 html, body, .background, #main {
   margin: 0;
   width: 100%;
@@ -306,26 +309,27 @@ html, body, .background, #main {
   min-height: 350px;
 }
 
+/* standard font */
 * {
   font-family: "Arial";
 }
 
+/* make icons white */
 i[class*="fa fa-"] {
   color: #fff;
 }
 
+/* to prevent unpleasant scrollbars */
 body {
   overflow-y: hidden;
 }
 
+/* helper class in case */
 .hidden {
   display: none;
 }
 
-.background-image {
-  display: none;
-}
-
+/* inherit box-sizing */
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -334,6 +338,65 @@ body {
   position: relative;
   background-color: #101010;
 }
+
+.fa-spinner.spinner {
+  display: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  display: none;
+}
+
+.loading .spinner {
+  display: inline-block;
+}
+
+.loading .loading-overlay {
+  display: block;
+}
+
+.fa-spinner {
+  opacity: 0.75;
+  font-size: 4rem;
+  position: absolute;
+  z-index: 100;
+  top: calc(50% - 2rem);
+  left: calc(50% - 2rem);
+}
+
+@-webkit-keyframes spinning {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spinning {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.fa-spinner {
+  -webkit-animation: spinning linear 1s infinite;
+          animation: spinning linear 1s infinite;
+}
+
+/* Header styles */
 
 #header {
   text-align: center;
@@ -419,6 +482,8 @@ body {
   transform: scaleY(-1);
 }
 
+/* Main Search Container Styles */
+
 #search-container {
   width: 250px;
   height: 40px;
@@ -433,19 +498,19 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(100, 100, 100, 0.1);
   border-bottom: 1px solid lightgreen;
   box-shadow: 1px 2px 6px rgba(0,0,0,0.4);
 }
 
 .open #search-form {
   background-color: transparent;
-  border-bottom: 1px solid #86dddd;
+  border-bottom: 1px solid lightgreen;
   box-shadow: none;
 }
 
 .open #search-form::after {
-  border-bottom: 1px solid #86dddd;
+  border-bottom: 1px solid lightgreen;
 }
 
 #search-submit,
@@ -510,16 +575,6 @@ body {
   font-size: 2rem;
   pointer-events: none;
   opacity: 0;
-}
-
-i.remove-food {
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: #000;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
 }
 
 .open#search-container {
@@ -658,16 +713,6 @@ i.remove-food {
   transition: opacity 0.3s, box-shadow 0.3s;
 }
 
-.food-item {
-  position: relative;
-  max-width: 100%;
-  padding: 1rem;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
-  transition: box-shadow 0.3s;
-}
-
 .open .result:hover,
 .recipes-open .result:hover {
   cursor: pointer;
@@ -750,9 +795,9 @@ i.remove-food {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 1rem;
   min-height: 100%;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.2);
 }
 
 .nutrition-facts {
@@ -771,11 +816,14 @@ i.remove-food {
 
 i.close-nutrition,
 i.close-details {
-  color: #000;
   font-size: 1.5rem;
   padding: 0.25rem;
   margin: 0 0.5rem;
   position: absolute;
+}
+
+i.close-nutrition {
+  color: #000;
 }
 
 .nutrition-title {
@@ -923,6 +971,8 @@ td {
   color: #444;
   font-size: 1.35rem;
 }
+
+/* Added foods */
 
 #main-foods-container {
   width: 250px;
@@ -1101,6 +1151,28 @@ td {
   top: 0;
 }
 
+.food-item {
+  position: relative;
+  max-width: 100%;
+  padding: 1rem;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+  transition: box-shadow 0.3s;
+}
+
+i.remove-food {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #000;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+/* Extra options */
+
 .options-wrapper {
   position: absolute;
   top: calc(45% - 110px);
@@ -1142,13 +1214,10 @@ td {
 
 .option-icon {
   font-size: 1.75rem;
-  padding: 0.5rem;
-}
-
-.charts-icon,
-.recipe-icon {
   padding: 0.75rem;
 }
+
+/* Manual add section */
 
 .manual-open .manual-toggle,
 .recipes-open .recipes-toggle {
@@ -1184,12 +1253,12 @@ td {
 }
 
 .manual-open .manual-add-inner-wrapper {
+  position: relative;
   display: block;
   align-self: center;
   margin: 0 auto;
   padding: 1rem;
-  border-radius: 3px;
-  border-bottom: 1px solid #dcedc8;
+  border-radius: 2px;
   background-color: #000;
   box-shadow: 1px 2px 6px rgba(0,0,0,0.4);
   z-index: 25;
@@ -1305,13 +1374,13 @@ td {
 
 .manual-open .close-manual,
 .close-charts {
-  position: relative;
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
   pointer-events: auto;
   cursor: pointer;
   opacity: 1;
   font-size: 2rem;
-  height: auto;
   padding: 0.5rem;
 }
 
@@ -1328,6 +1397,8 @@ td {
 .manual-submit-text:hover {
   color: #dcedc8;
 }
+
+/* Charts */
 
 .charts-inner-wrapper {
   z-index: 15;
@@ -1416,6 +1487,8 @@ svg {
   border-bottom: 1px solid #dcedc8;
 }
 
+/* Recipes */
+
 .recipes-inner-wrapper {
   z-index: -10;
   opacity: 0;
@@ -1438,7 +1511,7 @@ svg {
   position: relative;
   margin: 0 auto;
   max-width: 950px;
-  border-bottom: 1px solid lightgreen;
+  border-bottom: 1px solid #86dddd;
 }
 
 .recipe-info-container {
@@ -1485,6 +1558,8 @@ svg {
   right: 0;
   bottom: 0;
 }
+
+/* Recipe details */
 
 .recipe-details {
   width: 100%;
@@ -1887,6 +1962,10 @@ svg {
     border-bottom: 2px solid lightgreen;
     right: 100%;
     transition: right 0.2s ease-out, width 0.2s ease-out;
+  }
+
+  #recipes-form::after {
+    border-bottom-color: #86dddd;
   }
 
   #search-form:hover::after,

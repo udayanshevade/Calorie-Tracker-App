@@ -2,30 +2,36 @@
 
 var app = app || {};
 
+/*
+ * Charts Mode View
+ */
 app.ChartsView = Backbone.View.extend({
 
+  // binds DOM container element
   'el': $('.charts-wrapper'),
 
+  // DOM events for the charts section
   'events': {
     'click .close-charts': 'closeChartsMode',
     'click .period-toggle': 'changeGraphPeriod'
   },
 
+  // initializes the graphs
   'initialize': function() {
     this.$graphContainer = this.$el.find('.calorie-graph-container');
 
+    // opens the charts mode
     this.listenTo(this.model, 'change:visible', this.toggleChartsMode);
+    // listens to change in period, re-renders the line chart
     this.listenTo(this.model, 'change:period', function() {
       this.updateGraph(this.model.get('period'));
     });
 
+    // draws the arc graph for calories eaten for the day
     this.initializeArc();
   },
 
-  'render': function() {
-    return this;
-  },
-
+  // initializes arc for reuse
   'initializeArc': function() {
     var that = this,
       width = 240,
@@ -69,6 +75,7 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // simply update arc when stats change
   'updateArc': function() {
     var that = this;
     this.calorieArc.datum({'endAngle': 0});
@@ -95,21 +102,25 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // open/close charts tray
   'toggleChartsMode': function() {
     var visible = this.model.get('visible')
     this.$el.toggleClass('charts-open', visible);
+    // re-animate graphs on open
     this.updateArc();
     if (visible) {
       this.updateGraph(this.model.get('period'));
     }
   },
 
+  // close charts tray
   'closeChartsMode': function() {
     this.model.set({
       'visible': false
     });
   },
 
+  // arc graph animation
   'arcTween': function(transition, newAngle, that) {
 
     transition.attrTween("d", function(d) {
@@ -126,6 +137,7 @@ app.ChartsView = Backbone.View.extend({
     });
   },
 
+  // initialize line chart
   'initializeGraph': function() {
     var that = this;
     var containerHeight = this.$graphContainer.height();
@@ -162,6 +174,7 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // update line chart with new stats
   'updateGraph': function() {
     var that = this;
     var period = this.model.get('period');
@@ -218,6 +231,7 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // collect dates data for line chart
   'harvestData': function(period) {
     var existingDateObjects = this.getDates();
     var existingDates = [];
@@ -237,6 +251,7 @@ app.ChartsView = Backbone.View.extend({
     var now = new Date(currentDate);
     var endDate = new Date(currentDate);
 
+    // depending on the period
     switch(period) {
       case 'weekly':
         this.xTicks = 7;
@@ -256,6 +271,7 @@ app.ChartsView = Backbone.View.extend({
         break;
     }
 
+    // checks specified range of dates for calories
     for (var d = rangeDate; d <= endDate; d.setDate(d.getDate() + 1)) {
       obj = {};
       dateString = d.toDateString();
@@ -277,6 +293,7 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // collect existing dates data
   'getDates': function() {
     var existingDates = {};
     var date, cals;
@@ -288,6 +305,7 @@ app.ChartsView = Backbone.View.extend({
     return existingDates;
   },
 
+  // animate line graph
   'lineGraphTween': function(data, that) {
 
     return function(d, i, a) {
@@ -310,6 +328,7 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // switch to new period
   'changeGraphPeriod': function(e) {
     var target = e.target;
     var period = target.classList[1];
@@ -322,6 +341,7 @@ app.ChartsView = Backbone.View.extend({
 
   },
 
+  // highlight correct period in the DOM
   'highlightSelectedPeriod': function() {
     var that = this;
     $('.period-toggle').each(function(i) {
@@ -329,6 +349,7 @@ app.ChartsView = Backbone.View.extend({
     });
   },
 
+  // depending on window resize
   'resize': function() {
     this.initializeGraph();
     this.updateGraph('weekly');

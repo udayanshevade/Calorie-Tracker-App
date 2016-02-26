@@ -1,8 +1,12 @@
 
 var app = app || {};
 
-app.Recipe = Backbone.Model.extend({
+/*
+ * Model for each recipe result logic
+ */
+app.RecipeResult = Backbone.Model.extend({
 
+  // default attributes for each recipe result
   'defaults': {
     'selected': false,
     'title': '',
@@ -14,6 +18,7 @@ app.Recipe = Backbone.Model.extend({
     'flavors': null
   },
 
+  // highlight selected recipe
   'toggleSelected': function() {
     this.set({
       'selected': !this.get('selected')

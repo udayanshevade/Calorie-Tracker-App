@@ -44,9 +44,9 @@ module.exports = function(grunt) {
             "dynamic": {
                 "files": [{
                     "expand": true,
-                    "cwd": "src/img",
-                    "src": ["*.{png,jpg,svg}"],
-                    "dest": "dist/img"
+                    "cwd": "src/",
+                    "src": ["favicon.ico", "img/*.{png,jpg,svg}"],
+                    "dest": "dist/"
                 }]
             }
         },

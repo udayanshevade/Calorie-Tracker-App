@@ -1,8 +1,14 @@
 
 var app = app || {};
 
+/*
+ * Model for nutrition data
+ */
 app.Nutrition = Backbone.Model.extend({
 
+  // default nutrition daily value limits
+  // use these to calculate the DV percentage of returned nutrients
+  // TODO: customizable daily values
   'defaults': {
     'nutrition_visible': false,
     'DV_total_fat': 65,
@@ -15,6 +21,7 @@ app.Nutrition = Backbone.Model.extend({
     'item_amount': 1
   },
 
+  // expand nutrition details
   'nutritionExpand': function() {
     this.set({
       'nutrition_visible': true

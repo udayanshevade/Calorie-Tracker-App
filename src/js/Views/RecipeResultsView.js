@@ -1,10 +1,15 @@
 
 var app = app || {};
 
+/*
+ * Recipe Results Section View
+ */
 app.RecipeResultsView = Backbone.View.extend({
 
+  // bind wrapper element
   'el': $('.recipes-wrapper'),
 
+  // DOM events for recipe results view
   'events': {
     'click .recipes-toggle': 'openRecipesMode',
     'click .close-recipes': 'closeRecipesMode',
@@ -12,6 +17,7 @@ app.RecipeResultsView = Backbone.View.extend({
     'keydown #recipes-input': 'escape'
   },
 
+  // initialize recipe results bindings
   'initialize': function() {
     this.$recipesContainer = this.$el.find('.recipes-inner-wrapper');
     this.$recipesList = this.$el.find('#recipes-list');
@@ -19,9 +25,11 @@ app.RecipeResultsView = Backbone.View.extend({
     this.$input = this.$el.find('#recipes-input');
 
     this.listenTo(this.model, 'change:visible', this.toggleRecipesView);
+    // if recipe result model added, render it
     this.listenTo(app.recipeResults, 'add', this.renderResult);
   },
 
+  // trim user input valand  fetch data
   'fetchData': function() {
     var val = this.$input.val();
     if (val) {
@@ -30,12 +38,15 @@ app.RecipeResultsView = Backbone.View.extend({
     return false;
   },
 
+  // query yummly api
   'fetchRecipesData': function(val) {
     var that = this;
     this.$recipesList.html('');
 
     var apiData = app.appView.yummlyAPI;
     var url = apiData.base + 'recipes';
+
+    $('#main').addClass('loading');
 
     $.getJSON(url, {
       'q': val,
@@ -47,7 +58,8 @@ app.RecipeResultsView = Backbone.View.extend({
 
       if (matches.length) {
 
-        $('.recipes-open .results-inner-container').css('background-color', 'rgba(0,0,0,0.4');
+        // add background color for emphasis
+        $('.recipes-open .results-inner-container').css('background-color', 'rgba(0,0,0,0.2');
 
         that.$el.find('.results-title').html('recipe results:');
 
@@ -69,12 +81,17 @@ app.RecipeResultsView = Backbone.View.extend({
       } else {
         that.recipesErrorDisplay();
       }
+
+      $('#main').removeClass('loading');
+
     }).fail(function() {
       that.recipesErrorDisplay();
+      $('#main').removeClass('loading');
     });
 
   },
 
+  // append recipe result list item
   'renderResult': function(result) {
     var view = new app.RecipeResultView({
       'model': result
@@ -83,32 +100,45 @@ app.RecipeResultsView = Backbone.View.extend({
     this.$recipesList.append(view.render().el);
   },
 
+  // recipes api error fallback handling
   'recipesErrorDisplay': function() {
     this.$el.find('.results-title').html('No matching recipes could be found at this time. Please try again later, or use a different search.');
   },
 
-  'recipeErrorDisplay': function() {
-    //
-  },
-
+  // open recipes section
   'openRecipesMode': function() {
     this.model.openRecipesMode();
     this.$input.focus();
   },
 
+  // hide recipes section
   'closeRecipesMode': function() {
     this.model.closeRecipesMode();
     this.$input.blur();
   },
 
+  // open/close based on state
   'toggleRecipesView': function() {
     this.$el.toggleClass('recipes-open', this.model.get('visible'));
   },
 
+  // escape shortcut
   'escape': function(e) {
     if (e.which === ESC_KEY) {
       this.closeRecipesMode();
     }
+  },
+
+  // deselect single food result
+  'deselectOne': function(recipeResult) {
+    recipeResult.set({
+      'selected': false
+    });
+  },
+
+  // deselect all food result items
+  'deselectAll': function() {
+    app.recipeResults.each(this.deselectOne, this);
   }
 
 });
