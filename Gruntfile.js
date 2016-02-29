@@ -60,7 +60,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['cssmin','uglify']);
-    grunt.registerTask('processhtml', ['processhtml']);
+    grunt.registerTask('html', ['processhtml']);
     grunt.registerTask('img', ['imagemin']);
 
 };

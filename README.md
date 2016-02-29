@@ -13,7 +13,7 @@
 
 1. Download repository.
 2. Install dependencies as specified in package.json: `npm install`
-3. If you make changes to the js or css files, run the build process: `grunt` and `grunt processhtml`
+3. If you make changes to the js or css files, run the build process: `grunt` and `grunt html`
 4. Navigate to the dist/ folder.
 5. Host a simple server: `python -m SimpleHTTPServer 8000`
 7. Open http://localhost:8000/ in your browser and enjoy!
