@@ -1,4 +1,4 @@
-# Neighborhood Map Project
+# Calorie Tracker Project
 
 #### Keep track of calories and find recipes
 
