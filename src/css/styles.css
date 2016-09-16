@@ -353,7 +353,7 @@ body {
   position: relative;
 }
 
-.fa-spinner.spinner {
+.spinner {
   display: none;
 }
 
@@ -374,13 +374,14 @@ body {
   display: block;
 }
 
-.fa-spinner {
+.spinner {
   opacity: 0.75;
-  font-size: 4rem;
+  width: 5rem;
+  height: 5rem;
   position: absolute;
   z-index: 100;
-  top: calc(50% - 2rem);
-  left: calc(50% - 2rem);
+  top: calc(50% - 2.5rem);
+  left: calc(50% - 2.5rem);
 }
 
 @-webkit-keyframes spinning {
@@ -405,9 +406,9 @@ body {
   }
 }
 
-.fa-spinner {
-  -webkit-animation: spinning linear 1s infinite;
-          animation: spinning linear 1s infinite;
+.spinner {
+  -webkit-animation: spinning linear 0.75s infinite;
+          animation: spinning linear 0.75s infinite;
 }
 
 /* Header styles */
